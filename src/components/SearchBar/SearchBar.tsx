@@ -45,7 +45,7 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
           </form>
         </div>
       </header>
-      <Toaster position="top-center" reverseOrder={false} />;
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }
