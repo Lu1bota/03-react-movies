@@ -12,7 +12,7 @@ function notify() {
 export default function SearchBar({ onSubmit }: SearchBarProps) {
   function handleSearch(formData: FormData) {
     const value = formData.get("query") as string;
-    if (value === "") {
+    if (value.trim() === "") {
       notify();
       return;
     }

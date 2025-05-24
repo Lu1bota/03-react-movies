@@ -11,16 +11,16 @@ import MovieModal from "../MovieModal/MovieModal";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  function openModal(movie: Movie) {
+  function openModal(movie: Movie): void {
     setSelectedMovie(movie);
     setIsModalOpen(true);
   }
-  function closeModal() {
+  function closeModal(): void {
     setIsModalOpen(false);
   }
 
@@ -43,12 +43,15 @@ export default function App() {
   }
   return (
     <>
-      <SearchBar onSubmit={fetchData} />
+      <SearchBar onSubmit={(value: string) => fetchData(value)} />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <MovieGrid onSelect={openModal} movies={movies} />
+      <MovieGrid
+        onSelect={(movie: Movie) => openModal(movie)}
+        movies={movies}
+      />
       {isModalOpen && selectedMovie && (
-        <MovieModal onClose={closeModal} movie={selectedMovie} />
+        <MovieModal onClose={() => closeModal()} movie={selectedMovie} />
       )}
       <Toaster />
     </>
